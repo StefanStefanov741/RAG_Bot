@@ -20,10 +20,10 @@ filename2 = "Inputs/Oblitus Pyramid.pdf"
 
 db_folder = "Outputs"
 
-#pdf_elements = pdf_to_elements(pdf_path=filename,unstructured_key=unstructured_key,unstructured_url=unstructured_url)
+pdf_elements = pdf_to_elements(pdf_path=filename,unstructured_key=unstructured_key,unstructured_url=unstructured_url)
 
-#db_created = create_database(pdf_elements,db_folder)
-db_created = True #Once it has been created simply set this to true and make sure the db_folder is the correct folder which was given when creating the database
+db_created = create_database(pdf_elements,db_folder)
+#db_created = True #Once it has been created simply set this to true and make sure the db_folder is the correct folder which was given when creating the database
 
 if db_created:
     db = load_database_from_dir(db_folder)
