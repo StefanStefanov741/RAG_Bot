@@ -1,0 +1,11 @@
+python-dotenv
+unstructured
+unstructured-ingest[remote]
+unstructured[pptx]
+markdown
+unstructured[markdown]
+pydantic
+chromadb
+langchain-community
+langchain-core
+langchain-openai
