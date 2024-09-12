@@ -3,7 +3,7 @@ from unstructured_client.models.errors import SDKError
 import unstructured_client
 from unstructured.staging.base import dict_to_elements
 
-def pdf_to_elements(pdf_path,unstructured_key,unstructured_url):
+def pdf_to_elements_advanced(pdf_path,unstructured_key,unstructured_url):
     u_client = unstructured_client.UnstructuredClient(
         api_key_auth=unstructured_key,
         server_url=unstructured_url

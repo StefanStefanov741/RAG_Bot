@@ -3,7 +3,7 @@ from langchain_openai import OpenAI
 from langchain.chains import ConversationalRetrievalChain, LLMChain
 from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 
-class OpenAI_Bot:
+class Simple_OpenAI_Bot:
     def __init__(self, temperature = 0, template ="", doc_retrieve_max=5):
         self.template = template
         self.doc_retrieve_max = doc_retrieve_max
