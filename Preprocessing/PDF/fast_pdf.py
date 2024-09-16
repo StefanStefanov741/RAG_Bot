@@ -1,6 +1,5 @@
-from unstructured.staging.base import dict_to_elements
-
 #For paid version
+from unstructured.staging.base import dict_to_elements
 from unstructured_client.models import shared
 from unstructured_client.models.errors import SDKError
 import unstructured_client

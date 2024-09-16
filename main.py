@@ -3,6 +3,7 @@ from Database.chromadb_functions import create_database,load_database_from_dir,a
 from Bots.simple_openai_bot import Simple_OpenAI_Bot
 from Bots.openai_gpt_bot import OpenAI_GPT_Bot
 from Preprocessing.PDF.fast_pdf import pdf_to_elements_fast,pdf_to_elements_fast_api
+from Preprocessing.PDF.personal import pdf_to_elements
 
 from dotenv import load_dotenv
 import os
@@ -23,7 +24,8 @@ filename2 = "Inputs/Oblitus Pyramid.pdf"
 db_folder = "Outputs"
 
 #pdf_elements = pdf_to_elements_fast_api(pdf_path=filename,unstructured_key=unstructured_key,unstructured_url=unstructured_url)
-pdf_elements = pdf_to_elements_fast(pdf_path=filename2)
+#pdf_elements = pdf_to_elements_fast(pdf_path=filename2)
+pdf_elements = pdf_to_elements(file_path=filename2)
 
 db_created = create_database(pdf_elements,db_folder)
 #db_created = True #Once it has been created simply set this to true and make sure the db_folder is the correct folder which was given when creating the database
