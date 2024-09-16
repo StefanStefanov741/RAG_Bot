@@ -9,3 +9,6 @@ chromadb
 langchain-community
 langchain-core
 langchain-openai
+python-magic-bin
+"unstructured[pdf]"
+langchain-community

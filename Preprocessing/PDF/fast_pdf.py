@@ -1,9 +1,15 @@
+from unstructured.staging.base import dict_to_elements
+
+#For paid version
 from unstructured_client.models import shared
 from unstructured_client.models.errors import SDKError
 import unstructured_client
-from unstructured.staging.base import dict_to_elements
 
-def pdf_to_elements_fast(pdf_path,unstructured_key,unstructured_url):
+#For free version
+from unstructured.partition.auto import partition
+
+
+def pdf_to_elements_fast_api(pdf_path,unstructured_key,unstructured_url):
     u_client = unstructured_client.UnstructuredClient(
         api_key_auth=unstructured_key,
         server_url=unstructured_url
@@ -29,3 +35,10 @@ def pdf_to_elements_fast(pdf_path,unstructured_key,unstructured_url):
         print(e)
         return []
 
+def pdf_to_elements_fast(pdf_path):
+    elements = partition(filename=pdf_path)
+    try:
+        return  elements
+    except Exception as e:
+        print(e)
+        return []
