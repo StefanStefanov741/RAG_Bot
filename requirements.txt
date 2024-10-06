@@ -12,3 +12,5 @@ langchain-openai
 python-magic-bin
 "unstructured[pdf]"
 langchain-community
+pytesseract
+PyPDF2
