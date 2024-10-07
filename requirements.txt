@@ -14,3 +14,10 @@ python-magic-bin
 langchain-community
 pytesseract
 PyPDF2
+
+'git+https://github.com/facebookresearch/detectron2.git'
+layoutparser
+tesseract-ocr
+PIL
+numpy
+cv2
