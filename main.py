@@ -1,3 +1,7 @@
+"""
+This file is used to quickly test different functions, you don't need to necessarily run it.
+"""
+
 from Preprocessing.PDF.advanced_pdf import pdf_to_elements_advanced,pdf_to_elements_advanced_api,pdfImage_to_elements
 from Database.chromadb_functions import create_database,load_database_from_dir,add_documents_to_database
 from Bots.simple_openai_bot import Simple_OpenAI_Bot

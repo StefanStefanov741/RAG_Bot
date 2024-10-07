@@ -19,47 +19,47 @@ class OpenAI_GPT_Bot:
         Returns:
         string: The bot's answer
         """
-    def __init__(self, model="gpt-3.5-turbo",temperature=0, template="", doc_retrieve_max=5):
-        self.template = template
-        self.doc_retrieve_max = doc_retrieve_max
-        self.prompt = PromptTemplate(template=template, input_variables=["question", "context"])
-        
-        # Use ChatOpenAI for GPT-3.5
-        self.llm = ChatOpenAI(temperature=temperature, model=model)
-        
-        self.doc_chain = load_qa_with_sources_chain(self.llm, chain_type="map_reduce")
-        self.question_generator_chain = LLMChain(llm=self.llm, prompt=self.prompt)
+        def __init__(self, model="gpt-3.5-turbo",temperature=0, template="", doc_retrieve_max=5):
+            self.template = template
+            self.doc_retrieve_max = doc_retrieve_max
+            self.prompt = PromptTemplate(template=template, input_variables=["question", "context"])
+            
+            # Use ChatOpenAI for GPT-3.5
+            self.llm = ChatOpenAI(temperature=temperature, model=model)
+            
+            self.doc_chain = load_qa_with_sources_chain(self.llm, chain_type="map_reduce")
+            self.question_generator_chain = LLMChain(llm=self.llm, prompt=self.prompt)
 
-    def ask(self, question, vectorstore):
-        """
-        Sends a question to the chatbot with the relevant context to answer it.
-        
-        Args:
-        question (string): The question you want answered.
-        vectorstore (Chroma): The chromadb reference used for quering the database
-        
-        Returns:
-        string: The bot's answer
-        """
-        answer = None
+        def ask(self, question, vectorstore):
+            """
+            Sends a question to the chatbot with the relevant context to answer it.
+            
+            Args:
+            question (string): The question you want answered.
+            vectorstore (Chroma): The chromadb reference used for quering the database
+            
+            Returns:
+            string: The bot's answer
+            """
+            answer = None
 
-        # Set up the document retriever from the vectorstore
-        retriever = vectorstore.as_retriever(
-            search_type="similarity",
-            search_kwargs={"k": self.doc_retrieve_max}
-        )
+            # Set up the document retriever from the vectorstore
+            retriever = vectorstore.as_retriever(
+                search_type="similarity",
+                search_kwargs={"k": self.doc_retrieve_max}
+            )
 
-        # Create a ConversationalRetrievalChain with question generation and document combination
-        qa_chain = ConversationalRetrievalChain(
-            retriever=retriever,
-            question_generator=self.question_generator_chain,
-            combine_docs_chain=self.doc_chain,
-        )
+            # Create a ConversationalRetrievalChain with question generation and document combination
+            qa_chain = ConversationalRetrievalChain(
+                retriever=retriever,
+                question_generator=self.question_generator_chain,
+                combine_docs_chain=self.doc_chain,
+            )
 
-        # Invoke the chain and return the answer
-        answer = qa_chain.invoke({
-            "question": question,
-            "chat_history": []
-        })["answer"]
+            # Invoke the chain and return the answer
+            answer = qa_chain.invoke({
+                "question": question,
+                "chat_history": []
+            })["answer"]
 
-        return answer
+            return answer
