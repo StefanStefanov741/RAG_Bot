@@ -1,0 +1,12 @@
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: jupyter.Dockerfile
+      target: jupyter
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+    volumes:
+      - /Users/mac/Dropbox/Jan/Work/Heinzel/Heinzel-AI/docker/containers
+    command: ["bash", "-c", "source /etc/bash.bashrc && jupyter notebook --notebook-dir=/tf --ip 0.0.0.0 --no-browser --allow-root"]

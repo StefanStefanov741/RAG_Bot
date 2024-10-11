@@ -1,0 +1,31 @@
+# All required CUDA packages
+cuda-command-line-tools-12-1
+cuda-cudart-dev-12-1
+cuda-nvcc-12-1
+cuda-cupti-12-1
+cuda-nvprune-12-1
+cuda-libraries-12-1
+cuda-nvrtc-12-1
+libcufft-12-1
+libcurand-12-1
+libcusolver-12-1
+libcusparse-12-1
+libcublas-12-1
+libcusolver-dev-12-1
+libcublas-dev-12-1
+libcusparse-dev-12-1
+# CuDNN: https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#ubuntu-network-installation
+libcudnn8=8.9.0.131-1+cuda12.1
+# TensorRT: See https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#maclearn-net-repo-install-rpm
+libnvinfer-plugin8=8.6.0.12-1+cuda12.0
+libnvinfer8=8.6.0.12-1+cuda12.0
+
+# Other packages
+build-essential
+pkg-config
+curl
+software-properties-common
+unzip
+ffmpeg
+libsm6 
+libxext6

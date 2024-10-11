@@ -1,0 +1,13 @@
+jupyter
+matplotlib
+jupyter_http_over_ws
+tensorboard
+torch==1.10.0
+torchvision==0.11.1
+torchaudio
+pdf2image
+layoutparser
+pytesseract
+Pillow
+opencv-python
+
