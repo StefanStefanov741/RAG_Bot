@@ -1,12 +1,12 @@
 services:
   jupyter:
     deploy:
-        resources:
-            reservations:
-              devices:
-                - driver: nvidia
-                  count: 1
-                  capabilities: [gpu]
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     build:
       context: .
       dockerfile: jupyter.Dockerfile
@@ -16,4 +16,6 @@ services:
       - "6006:6006"
     volumes:
       - D:/RAG Research/Code/Preprocessing/PDF/Detectron2_container:/tf
+    environment:
+      - CUDA_VISIBLE_DEVICES=""
     command: ["bash", "-c", "source /etc/bash.bashrc && jupyter notebook --notebook-dir=/tf --ip 0.0.0.0 --no-browser --allow-root"]

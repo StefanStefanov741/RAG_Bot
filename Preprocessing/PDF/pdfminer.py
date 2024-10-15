@@ -2,7 +2,6 @@ from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextContainer
 from typing import Dict, List, Any
 from Preprocessing.PDF.fast_pdf import pdf_to_elements_fast
-from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextBoxHorizontal
 from unstructured.documents.elements import Element, ElementMetadata, CoordinateSystem
 

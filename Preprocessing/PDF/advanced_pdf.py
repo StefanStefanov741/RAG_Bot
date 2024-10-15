@@ -226,6 +226,4 @@ def pdf_to_elements_advanced(pdf_path, model, display= False) :
     
     else:
         raise ValueError("Do not recognize the specified model. Choose either YoloX or Detectron2")
-    
-d
 

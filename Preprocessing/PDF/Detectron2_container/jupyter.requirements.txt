@@ -10,4 +10,8 @@ layoutparser
 pytesseract
 Pillow
 opencv-python
-
+unstructured
+unstructured[pdf]
+PyPDF2
+langchain-community
+python-magic
