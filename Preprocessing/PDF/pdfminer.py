@@ -98,13 +98,13 @@ def pdf_to_elements_dict(file_path: str) -> Dict[int, List[Dict[str, Any]]]:
                         if(_is_string_in_titles(titles=titles,search_string=text)):
                             page_elements.append({
                                 'category': "Title",
-                                'text': text,
+                                'text': text.replace("\n",""),
                                 'bbox': (x0, y0, x1, y1)
                             })
                         else:
                             page_elements.append({
                                 'category': "'NarrativeText'",
-                                'text': text,
+                                'text': text.replace("\n",""),
                                 'bbox': (x0, y0, x1, y1)
                             })
 
@@ -161,7 +161,7 @@ def pdf_to_elements(file_path: str) -> List[Element]:
                         )
 
                         unstructured_element.category = element_type
-                        unstructured_element.text = text
+                        unstructured_element.text = text.replace("\n","")
                         extracted_elements.append(unstructured_element)
 
     except Exception as e:
