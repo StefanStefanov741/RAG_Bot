@@ -16,8 +16,17 @@ RUN apt-get update && apt-get install -y \
     libxrender1 \
     libgstreamer1.0-0 \
     libgstreamer-plugins-base1.0-0 \
+    poppler-utils \
+    git \
+    tesseract-ocr \
+    wget \
+    libmagic1 \
+    libmagic-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Make sure gpu is not used
+ENV CUDA_VISIBLE_DEVICES=""
 
 # Set the working directory in the container
 WORKDIR /app

@@ -4,7 +4,7 @@ import requests
 url = "http://127.0.0.1:5000/process-pdf-advanced"
 
 # Path to the PDF file you want to upload
-file_path = "D:/RAG Research/Code/Inputs/A New Jewelflower (Streptanthus, Brassicaceae) From Marin County, California, Usa.pdf"
+file_path = "D:/RAG Research/Code/Inputs/Oblitus Pyramid.pdf"
 
 # Open the file in binary mode
 with open(file_path, 'rb') as file:

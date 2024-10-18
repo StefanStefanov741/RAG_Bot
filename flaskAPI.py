@@ -7,6 +7,8 @@ import os
 
 app = Flask(__name__)
 
+tempFolder = "/app/tmp"
+
 def elements_to_json(elements):
     # Create a list of dictionaries for each element
     elements_list = [{"category": element.category, "text": element.text} for element in elements]
@@ -28,7 +30,7 @@ def extract_pdf_fast():
 
     # Save the file to a temporary directory
     unique_filename = f"{uuid.uuid4()}_{pdf_file.filename}"
-    pdf_path = os.path.join('/app/tmp', unique_filename)
+    pdf_path = os.path.join(tempFolder, unique_filename)
     pdf_file.save(pdf_path)
 
     try:
@@ -55,7 +57,7 @@ def extract_pdf_advanced():
 
     # Save the file to a temporary directory
     unique_filename = f"{uuid.uuid4()}_{pdf_file.filename}"
-    pdf_path = os.path.join('/app/tmp', unique_filename)
+    pdf_path = os.path.join(tempFolder, unique_filename)
     pdf_file.save(pdf_path)
 
     try:
@@ -67,6 +69,5 @@ def extract_pdf_advanced():
 
     # Return the extracted text as json
     return extracted_json, 200
-
 
 app.run(debug=True)
