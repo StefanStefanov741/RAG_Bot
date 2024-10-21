@@ -1,10 +1,10 @@
 import requests
 
 # URL of the API
-url = "http://127.0.0.1:5000/process-pdf-advanced"
+url = "https://fzmppztbyb.eu-central-1.awsapprunner.com/process-pdf-detectron"
 
 # Path to the PDF file you want to upload
-file_path = "D:/RAG Research/Code/Inputs/Oblitus Pyramid.pdf"
+file_path = "/Users/mac/Downloads/biology_paper.pdf"
 
 # Open the file in binary mode
 with open(file_path, 'rb') as file:
@@ -13,6 +13,7 @@ with open(file_path, 'rb') as file:
     
     # Send the POST request with the file
     response = requests.post(url, files=files)
+    print(response)
 
     # Print the response from the server
     if response.status_code == 200:

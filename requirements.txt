@@ -1,3 +1,4 @@
+flask
 python-dotenv
 unstructured
 unstructured-ingest[remote]
@@ -6,14 +7,25 @@ markdown
 unstructured[markdown]
 pydantic
 chromadb
-langchain-community
-langchain-core
-langchain-openai
-unstructured[pdf]
-pytesseract
 PyPDF2
 layoutparser
 Pillow
 numpy
 opencv-python
-flask
+pytesseract
+langchain-community
+langchain-core
+langchain-openai
+#unstructured[pdf]
+#unstructured-inference==0.7.36
+
+
+#Detectron2 extras
+
+matplotlib
+tensorboard
+torch==1.11.0
+torchvision==0.12
+torchaudio
+pdf2image
+
