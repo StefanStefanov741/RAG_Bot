@@ -53,6 +53,17 @@ def elements_to_json(elements):
     # Convert the list to a JSON string
     return json.dumps(elements_list, indent=4)
 
+def detectron_array_to_json(array):
+    json_output = []
+
+    for item in array:
+        # Get category and text from each item in the extracted array
+        category, text = item[0], item[1]
+        # Create a dictionary for each item and append it to the result list
+        json_output.append({"category": category, "text": text.strip()})
+
+    return json.dumps(json_output, indent=4)
+
 @app.route("/process-pdf-fast", methods=["POST"])
 def extract_pdf_fast():
     # Check if a file is in the request
@@ -170,7 +181,7 @@ def extract_pdf_detectron():
         return jsonify({"error": str(e)}), 500
     
     # Return the extracted text as json
-     return json.dumps(detected_texts), 200
+     return detectron_array_to_json(detected_texts), 200
 
 
 # @app.route("/process-pdf-advanced", methods=["POST"])

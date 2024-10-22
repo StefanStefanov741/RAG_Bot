@@ -1,10 +1,13 @@
 import requests
 
 # URL of the API
-url = "https://fzmppztbyb.eu-central-1.awsapprunner.com/process-pdf-detectron"
-
+#url = "https://fzmppztbyb.eu-central-1.awsapprunner.com/process-pdf-detectron"
+# For local tests
+#url = "http://127.0.0.1:5000/process-pdf-advanced"
+# For EC2 tests
+url = "http://16.16.182.179:80/process-pdf-fast"
 # Path to the PDF file you want to upload
-file_path = "/Users/mac/Downloads/biology_paper.pdf"
+file_path = "D:/RAG Research/Code/Inputs/Oblitus Pyramid.pdf"
 
 # Open the file in binary mode
 with open(file_path, 'rb') as file:
