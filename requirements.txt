@@ -16,8 +16,8 @@ pytesseract
 langchain-community
 langchain-core
 langchain-openai
-#unstructured[pdf]
-#unstructured-inference==0.7.36
+unstructured[pdf]
+unstructured-inference==0.7.36
 
 
 #Detectron2 extras

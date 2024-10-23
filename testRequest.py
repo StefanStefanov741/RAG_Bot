@@ -3,9 +3,9 @@ import requests
 # URL of the API
 #url = "https://fzmppztbyb.eu-central-1.awsapprunner.com/process-pdf-detectron"
 # For local tests
-#url = "http://127.0.0.1:5000/process-pdf-advanced"
+url = "http://127.0.0.1:5000/process-pdf-detectron"
 # For EC2 tests
-url = "http://16.16.182.179:80/process-pdf-fast"
+#url = "http://51.20.34.232:80/process-pdf-advanced"
 # Path to the PDF file you want to upload
 file_path = "D:/RAG Research/Code/Inputs/Oblitus Pyramid.pdf"
 
