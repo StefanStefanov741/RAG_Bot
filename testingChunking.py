@@ -1,6 +1,6 @@
-from unstructured.documents.elements import Element, ElementMetadata, CoordinateSystem
+from Misc.Element import Element
 from Preprocessing.PDF.pdfminer import pdf_to_elements
-from Database.chromadb_functions import create_database,load_database_from_dir,add_documents_to_database
+from Database.chromadb_functions import create_database,load_database_from_dir,add_documents_to_database,create_database2,add_documents_to_database2
 from Bots.simple_openai_bot import Simple_OpenAI_Bot
 from Bots.openai_gpt_bot import OpenAI_GPT_Bot
 from dotenv import load_dotenv
@@ -50,7 +50,7 @@ def get_all_files(folder_path):
     
     return file_list
 
-def jsonToElements(json_data):
+def jsonToElements2(json_data):
     # Check if json_data is a Response object and handle it
     if hasattr(json_data, 'json'):  # Check if it's a Response object
         json_data = json_data.json()  # Use the .json() method to directly parse it
@@ -62,30 +62,13 @@ def jsonToElements(json_data):
 
     elements = []
     for item in json_data:
-        category = item['category']
-        text = item['text']
-
-        coordinate_system = CoordinateSystem(width=0, height=0)
-
-        metadata = ElementMetadata(
-            filename="Unknown",
-            page_number=0,
-            coordinates=coordinate_system,
-            languages=['en']
-        )
-
         # Initialize Element object
         element = Element(
-            element_id=None,
-            coordinates=((0, 0), (0, 0)),
-            coordinate_system=coordinate_system,
-            metadata=metadata,
-            detection_origin=category
+            text=item['text'],
+            category=item['category']
         )
 
         # Assign category and text
-        element.category = category
-        element.text = text
         elements.append(element)
 
     return elements
@@ -107,6 +90,7 @@ input_files_list = get_all_files(files_dir)
 skip_file = ""
 
 db_exists = contains_sqlite3_file(db_folder)
+
 if(not db_exists):
     if os.path.isfile(input_files_list[0]) and (not skip_file==input_files_list[0]):
         # Open the file in binary mode
@@ -120,8 +104,8 @@ if(not db_exists):
             # Print the response from the server
             if response.status_code == 200:
                 print("File uploaded successfully!")
-                initial_elements = jsonToElements(json_data=response)
-                db_exists = create_database(initial_elements,db_folder)
+                initial_elements = jsonToElements2(json_data=response)
+                db_exists = create_database2(initial_elements,db_folder)
                 skip_first_file=input_files_list[0]
             else:
                 print(f"Error: {response.status_code}")
@@ -148,8 +132,8 @@ if db_exists:
                     # Print the response from the server
                     if response.status_code == 200:
                         print("File uploaded successfully!")
-                        new_pdf_elements = jsonToElements(json_data=response)
-                        add_documents_to_database(new_pdf_elements,db)
+                        new_pdf_elements = jsonToElements2(json_data=response)
+                        add_documents_to_database2(new_pdf_elements,db)
                     else:
                         print(f"Error: {response.status_code}")
                         print(response.json())

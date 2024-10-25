@@ -8,7 +8,6 @@ from pdf2image import convert_from_bytes
 from PIL import Image
 
 
-
 app = Flask(__name__)
 
 tempFolder = "/app/tmp"
