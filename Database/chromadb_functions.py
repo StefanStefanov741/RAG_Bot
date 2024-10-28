@@ -3,7 +3,7 @@ from unstructured.chunking.basic import chunk_elements
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
-from Chunking.chunking import character_chunking
+from Chunking.chunking import character_chunking, title_chunking
 from Misc.Element import Element
 import os
 
@@ -114,7 +114,7 @@ def create_database2(input_elements, output_db_path):
     False if there was an issue.
     """
     try:
-        elements = character_chunking(input_elements=input_elements,characterLimit=1000,overlap=100)
+        elements = title_chunking(input_elements=input_elements,characterLimit=1000,overlap=100)
         #elements = chunk_elements(elements=input_elements,max_characters=99999,overlap=True)
 
         # Create documents from the elements
@@ -147,7 +147,7 @@ def add_documents_to_database2(input_elements, vectorstore):
     """
     try:
         # Chunk the input elements and create documents
-        elements = character_chunking(input_elements=input_elements,characterLimit=1000,overlap=100)
+        elements = title_chunking(input_elements=input_elements,characterLimit=1000,overlap=100)
         new_documents = []
         for element in elements:
             new_documents.append(Document(page_content=element.text, metadata=element.return_metadata()))
