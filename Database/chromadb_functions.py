@@ -114,8 +114,7 @@ def create_database2(input_elements, output_db_path):
     False if there was an issue.
     """
     try:
-        elements = title_chunking(input_elements=input_elements,characterLimit=1000,overlap=100)
-        #elements = chunk_elements(elements=input_elements,max_characters=99999,overlap=True)
+        elements = title_chunking(input_elements=input_elements,characterLimit=1000,overlap=140,last_symbol=".",last_overlap_symbol=".")
 
         # Create documents from the elements
         documents = []
@@ -147,7 +146,7 @@ def add_documents_to_database2(input_elements, vectorstore):
     """
     try:
         # Chunk the input elements and create documents
-        elements = title_chunking(input_elements=input_elements,characterLimit=1000,overlap=100)
+        elements = title_chunking(input_elements=input_elements,characterLimit=1000,overlap=140,last_symbol=".",last_overlap_symbol=".")
         new_documents = []
         for element in elements:
             new_documents.append(Document(page_content=element.text, metadata=element.return_metadata()))
