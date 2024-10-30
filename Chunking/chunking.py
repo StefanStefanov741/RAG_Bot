@@ -121,9 +121,6 @@ def title_chunking(input_elements, characterLimit=1000, overlap=0, last_symbol="
         # Process the element's text
         text_to_process = element.text.replace("\xa0", " ")
 
-        if("foods and pollen " in text_to_process):
-            a = 1
-
         while text_to_process:
             # Calculate remaining space
             remaining_space = characterLimit - len(current_chunk_text)

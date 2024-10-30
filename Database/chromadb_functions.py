@@ -20,7 +20,7 @@ def create_database(input_elements, output_db_path):
     False if there was an issue.
     """
     try:
-        elements = chunk_by_title(elements=input_elements,overlap=True)
+        elements = chunk_by_title(elements=input_elements,overlap=True,max_characters=1000)
         #elements = chunk_elements(elements=input_elements,max_characters=99999,overlap=True)
 
         # Create documents from the elements
@@ -81,7 +81,7 @@ def add_documents_to_database(input_elements, vectorstore):
     """
     try:
         # Chunk the input elements and create documents
-        elements = chunk_by_title(input_elements)
+        elements = chunk_by_title(input_elements,overlap=True,max_characters=1000)
         new_documents = []
         for element in elements:
             metadata = element.metadata.to_dict()
