@@ -1,5 +1,7 @@
 # How to run the Kubernetes Cluster locally
 
+Video: https://www.dropbox.com/s/8vaz8g68ymdvitk/Bildschirmaufnahme%202024-10-24%20um%2017.15.07.mov?st=psiaqt9r&dl=0
+
 Before doing the steps below: Open docker desktop, click on Settings and enable Kubernetes. Then:
 
 ## 1st Navigate to API_Gateway and build the API container:
@@ -79,7 +81,7 @@ where you replace the pdf path with your pdf, that you want to try out. You shou
 
 to then see the result run:
 
-curl -X GET http://localhost:30000/get-pdf-result/<ID that you copied>
+curl -X GET http://localhost:30000/get-pdf-result/your_pdf_id
 
 
  Have fun :) 
