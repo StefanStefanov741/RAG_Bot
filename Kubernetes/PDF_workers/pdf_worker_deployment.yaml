@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdf-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pdf-worker
+  template:
+    metadata:
+      labels:
+        app: pdf-worker
+    spec:
+      containers:
+        - name: pdf-worker
+          image: localhost:5000/pdf_worker:latest
+          env:
+            - name: RABBITMQ_HOST
+              value: "rabbitmq"  # This matches the RabbitMQ service name

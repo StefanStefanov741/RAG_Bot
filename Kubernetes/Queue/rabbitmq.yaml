@@ -1,0 +1,73 @@
+  apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: rabbitmq-pv
+  spec:
+    storageClassName: hostpath
+    capacity:
+      storage: 1Gi
+    accessModes:
+      - ReadWriteOnce
+    hostPath:
+      path: "/Users/mac/Dropbox/Jan/Work/Heinzel/RAG_Bot-3/Kubernetes/Queue/queue_storage"  # Kubernetes  requires an absolute path here for a local cluster
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: rabbitmq-pvc
+spec:
+    storageClassName: hostpath
+    #volumeName: rabbitmq-pv
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi  # Adjust the size based on your needs
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3-management
+          ports:
+            - containerPort: 5672  # The default port for RabbitMQ
+            - containerPort: 15672 # Management UI
+          volumeMounts:
+            - mountPath: /var/lib/rabbitmq/mnesia
+              name: rabbitmq-pv
+      volumes:
+        - name: rabbitmq-pv
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+      name: amqp
+    - protocol: TCP
+      port: 15672
+      targetPort: 15672
+      name: management
