@@ -22,6 +22,10 @@ COPY setup.sources.sh /setup.sources.sh
 COPY setup.packages.sh /setup.packages.sh
 COPY gpu.packages.txt /gpu.packages.txt
 
+COPY test /test
+COPY test /val_images
+COPY output /output
+
 #COPY model_final.pth /model_final.pth
 
 RUN chmod a+rwx /setup.sources.sh

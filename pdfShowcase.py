@@ -1,8 +1,8 @@
+from dotenv import load_dotenv
 from Preprocessing.PDF.advanced_pdf import pdf_to_elements_advanced
 from Database.chromadb_functions import create_database,load_database_from_dir,add_documents_to_database
 from Bots.simple_openai_bot import Simple_OpenAI_Bot
 from Bots.openai_gpt_bot import OpenAI_GPT_Bot
-from dotenv import load_dotenv
 import os
 
 def contains_sqlite3_file(folder_path):

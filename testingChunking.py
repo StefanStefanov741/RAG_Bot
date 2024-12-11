@@ -83,8 +83,8 @@ db_folder = "D:\RAG Research\Code\Outputs"
 
 #The api url
 #url = "http://127.0.0.1:5000/process-pdf-fast"
-url = "http://127.0.0.1:5000/process-pdf-yolox"
-#url = "http://127.0.0.1:5000/process-pdf-detectron"
+#url = "http://127.0.0.1:5000/process-pdf-yolox"
+url = "http://127.0.0.1:5000/process-pdf-detectron"
 
 input_files_list = get_all_files(files_dir)
 skip_file = ""

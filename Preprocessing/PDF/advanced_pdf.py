@@ -17,10 +17,10 @@ from PIL import Image
 
 #For detectron2
 import torch
-import detectron2
-from detectron2.engine import DefaultPredictor
-from detectron2.config import get_cfg
-from detectron2 import model_zoo
+# import detectron2
+# from detectron2.engine import DefaultPredictor
+# from detectron2.config import get_cfg
+# from detectron2 import model_zoo
 import layoutparser as lp
 
 import pytesseract
@@ -124,66 +124,66 @@ def pdf_to_elements_advanced(pdf_path) :
         print(e)
         return []
 
-def pdf_to_dict_detectron(pdf_path):
-    """
-    Extracts elements from a pdf file by utilizing detectron2
+# def pdf_to_dict_detectron(pdf_path):
+#     """
+#     Extracts elements from a pdf file by utilizing detectron2
     
-    Args:
-    pdf_path (String): Path to the pdf file for information extraction.
+#     Args:
+#     pdf_path (String): Path to the pdf file for information extraction.
     
-    Returns:
-    An array of extracted texts
-    """
+#     Returns:
+#     An array of extracted texts
+#     """
 
-    os.chdir('../../..')
-    path= ''
-    prediction_score_threshold = 0.7
-    class_labels = ['Text', 'Title', 'List', 'Table', 'Figure']
+#     os.chdir('../../..')
+#     path= ''
+#     prediction_score_threshold = 0.7
+#     class_labels = ['Text', 'Title', 'List', 'Table', 'Figure']
 
-    # Set up Detectron2 config
-    cfg = get_cfg()
-    cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml"))
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a threshold for predictions
-    cfg.MODEL.WEIGHTS = path+ "model_final.pth" 
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = prediction_score_threshold
-    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 5
+#     # Set up Detectron2 config
+#     cfg = get_cfg()
+#     cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml"))
+#     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a threshold for predictions
+#     cfg.MODEL.WEIGHTS = path+ "model_final.pth" 
+#     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = prediction_score_threshold
+#     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 5
 
-    cfg.MODEL.DEVICE = "cpu"
+#     cfg.MODEL.DEVICE = "cpu"
     
-    detected_texts = []
+#     detected_texts = []
 
-    predictor = DefaultPredictor(cfg)
+#     predictor = DefaultPredictor(cfg)
     
-    images= pdf_to_image(pdf_path)
-    for i, current_image in images:
-        #img = np.array(Image.open(current_image))
-        img = np.array(current_image)
+#     images= pdf_to_image(pdf_path)
+#     for i, current_image in images:
+#         #img = np.array(Image.open(current_image))
+#         img = np.array(current_image)
 
-        # Perform page object detection
-        outputs = predictor(img)
+#         # Perform page object detection
+#         outputs = predictor(img)
 
-        # Debug outputs
-        instances = outputs["instances"].to("cpu")
-        pred_boxes = instances.pred_boxes
-        scores = instances.scores
-        pred_classes = instances.pred_classes
+#         # Debug outputs
+#         instances = outputs["instances"].to("cpu")
+#         pred_boxes = instances.pred_boxes
+#         scores = instances.scores
+#         pred_classes = instances.pred_classes
 
-        # Loop through each detected object
-        for i in range(0, len(pred_boxes)):
-            box = pred_boxes[i].tensor.numpy()[0]
-            x1, y1, x2, y2 = int(box[0]), int(box[1]), int(box[2]), int(box[3])
+#         # Loop through each detected object
+#         for i in range(0, len(pred_boxes)):
+#             box = pred_boxes[i].tensor.numpy()[0]
+#             x1, y1, x2, y2 = int(box[0]), int(box[1]), int(box[2]), int(box[3])
 
-            # Crop the image to the bounding box
-            cropped_img = img[y1:y2, x1:x2]
+#             # Crop the image to the bounding box
+#             cropped_img = img[y1:y2, x1:x2]
 
-            # Perform OCR on the cropped image
-            text = pytesseract.image_to_string(cropped_img, output_type=Output.STRING)
+#             # Perform OCR on the cropped image
+#             text = pytesseract.image_to_string(cropped_img, output_type=Output.STRING)
 
-            # Append the extracted text to the list
+#             # Append the extracted text to the list
 
-            label_key = int(pred_classes[i].numpy())
-            label = class_labels[label_key]
-            detected_texts.append([label,text.strip().replace("\n","")])  # Store each text as a single-element list
+#             label_key = int(pred_classes[i].numpy())
+#             label = class_labels[label_key]
+#             detected_texts.append([label,text.strip().replace("\n","")])  # Store each text as a single-element list
 
     
-    return detected_texts
+#     return detected_texts

@@ -43,3 +43,4 @@ Kubernetes/Queue/queue_storage/rabbit@rabbitmq-f544967b5-blqlt/msg_stores/vhosts
 Kubernetes/Queue/queue_storage/rabbit@rabbitmq-f544967b5-blqlt/quorum/rabbit@rabbitmq-f544967b5-blqlt/00000001.wal
 Kubernetes/Queue/queue_storage/rabbit@rabbitmq-f544967b5-blqlt/quorum/rabbit@rabbitmq-f544967b5-blqlt/meta.dets
 Kubernetes/Queue/queue_storage/rabbit@rabbitmq-f544967b5-blqlt/quorum/rabbit@rabbitmq-f544967b5-blqlt/names.dets
+val_images/
