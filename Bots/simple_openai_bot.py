@@ -32,16 +32,20 @@ class Simple_OpenAI_Bot:
     Args:
     question (string): The question you want answered.
     vectorstore (Chroma): The chromadb reference used for quering the database
+    chosen_k (int): The amount of documents to retrieve from the database
     
     Returns:
     string: The bot's answer
     """
-    def ask(self,question,vectorstore):
+    def ask(self,question,vectorstore,chosen_k=None):
         answer = None
+
+        if(chosen_k == None):
+            chosen_k = self.doc_retrieve_max
 
         retriever = vectorstore.as_retriever(
             search_type="similarity",
-            search_kwargs={"k": self.doc_retrieve_max}
+            search_kwargs={"k": chosen_k}
         )
 
         qa_chain = ConversationalRetrievalChain(
