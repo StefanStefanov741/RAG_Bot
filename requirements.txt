@@ -29,3 +29,6 @@ torchvision==0.12
 torchaudio
 pdf2image
 
+
+#GUI Demo
+tk
